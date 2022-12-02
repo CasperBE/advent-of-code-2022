@@ -20,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/day1', DayOneController::class)->name('day1');
+
+Route::get('/day2', DayTwoController::class)->name('day2');
