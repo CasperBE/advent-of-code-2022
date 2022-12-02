@@ -3,11 +3,14 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\DayOneController;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class DayOneTest extends TestCase
 {
+    public string $filename = "test/dayone.txt";
+
     /**
      * Test day one, first task.
      *
@@ -15,17 +18,13 @@ class DayOneTest extends TestCase
      */
     public function test_the_highest_total()
     {
-        $filename = "test/dayone.txt";
-
-        $contents = Storage::get($filename);
-
-        $array = preg_split("/\r\n|\n|\r/", $contents);
+        $array = Arr::fromFile(Storage::get($this->filename));
 
         $controller = new DayOneController;
 
         $highestTotal = $controller->getHighestTotal($array);
 
-        $this->assertEquals($highestTotal, 24000);
+        $this->assertEquals(24000, $highestTotal);
     }
 
     /**
@@ -35,16 +34,12 @@ class DayOneTest extends TestCase
      */
     public function test_top_three_totals()
     {
-        $filename = "test/dayone.txt";
-
-        $contents = Storage::get($filename);
-
-        $array = preg_split("/\r\n|\n|\r/", $contents);
+        $array = Arr::fromFile(Storage::get($this->filename));
 
         $controller = new DayOneController;
 
         $topThreeTotal = $controller->getTopThreeTotal($array);
 
-        $this->assertEquals($topThreeTotal, 45000);
+        $this->assertEquals(45000, $topThreeTotal);
     }
 }

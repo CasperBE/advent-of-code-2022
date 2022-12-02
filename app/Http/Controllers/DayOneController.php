@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class DayOneController extends Controller
 {
+    public string $filename = "input/dayone.txt";
+
     /**
      * Handle the incoming request.
      *
@@ -14,11 +17,7 @@ class DayOneController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $filename = "input/dayone.txt";
-
-        $contents = Storage::get($filename);
-
-        $array = preg_split("/\r\n|\n|\r/", $contents);
+        $array = Arr::fromFile(Storage::get($this->filename));
 
         echo "1) Highest total: " . $this->getHighestTotal($array) . "<br>\n";
 
