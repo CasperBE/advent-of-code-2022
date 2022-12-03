@@ -16,7 +16,7 @@ class DayOneTest extends TestCase
      *
      * @return void
      */
-    public function test_the_highest_total()
+    public function test_the_highest_total(): void
     {
         $array = Arr::fromFile(Storage::get($this->filename));
 
@@ -32,7 +32,7 @@ class DayOneTest extends TestCase
      *
      * @return void
      */
-    public function test_top_three_totals()
+    public function test_top_three_totals(): void
     {
         $array = Arr::fromFile(Storage::get($this->filename));
 

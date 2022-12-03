@@ -12,11 +12,11 @@ class DayThreeTest extends TestCase
     public string $filename = 'test/daythree.txt';
 
     /**
-     * A basic feature test example.
+     * Test day three, first task.
      *
      * @return void
      */
-    public function test_sum_priorities()
+    public function test_sum_priorities(): void
     {
         $array = Arr::fromFile(Storage::get($this->filename));
 
@@ -27,7 +27,12 @@ class DayThreeTest extends TestCase
         $this->assertEquals(157, $sum_of_priorities);
     }
 
-    public function test_new_sum_priorities()
+    /**
+     * Test day three, second task.
+     *
+     * @return void
+     */
+    public function test_new_sum_priorities(): void
     {
         $array = Arr::fromFile(Storage::get($this->filename));
 
@@ -38,7 +43,12 @@ class DayThreeTest extends TestCase
         $this->assertEquals(70, $sum_of_priorities);
     }
 
-    public function test_letter_to_number()
+    /**
+     * Test converting a letter to a number.
+     *
+     * @return void
+     */
+    public function test_letter_to_number(): void
     {
         $controller = new DayThreeController;
 
@@ -48,7 +58,12 @@ class DayThreeTest extends TestCase
         $this->assertEquals(52, $controller->letterToNumber('Z'));
     }
 
-    public function test_common_letter()
+    /**
+     * Test getting the common letter in two strings.
+     *
+     * @return void
+     */
+    public function test_common_letter_in_two_string(): void
     {
         $one = 'vJrwpWtwJgWr';
         $two = 'hcsFMMfFFhFp';
@@ -60,7 +75,12 @@ class DayThreeTest extends TestCase
         $this->assertEquals('p', $common_letter);
     }
 
-    public function test_common_letter_of_three()
+    /**
+     * Test getting the common letter of three strings.
+     *
+     * @return void
+     */
+    public function test_common_letter_in_three_strings(): void
     {
         $one = 'vJrwpWtwJgWrhcsFMMfFFhFp';
         $two = 'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL';
