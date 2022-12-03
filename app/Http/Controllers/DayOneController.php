@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DayOneController extends Controller
 {
-    public string $filename = "input/dayone.txt";
+    public string $filename = 'input/dayone.txt';
 
     /**
      * Handle the incoming request.
@@ -19,9 +19,9 @@ class DayOneController extends Controller
     {
         $array = Arr::fromFile(Storage::get($this->filename));
 
-        echo "1) Highest total: " . $this->getHighestTotal($array) . "<br>\n";
+        echo '1) Highest total: '.$this->getHighestTotal($array)."<br>\n";
 
-        echo "2) Top three totals: " . $this->getTopThreeTotal($array);
+        echo '2) Top three totals: '.$this->getTopThreeTotal($array);
     }
 
     public function getHighestTotal($array): int
@@ -37,7 +37,7 @@ class DayOneController extends Controller
 
                 $current_total = 0;
             } else {
-                $current_total += (int)$line;
+                $current_total += (int) $line;
             }
         }
 
@@ -55,7 +55,7 @@ class DayOneController extends Controller
 
                 $current_total = 0;
             } else {
-                $current_total += (int)$line;
+                $current_total += (int) $line;
             }
         }
 

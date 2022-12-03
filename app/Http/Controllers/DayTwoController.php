@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DayTwoController extends Controller
 {
-    public string $filename = "input/daytwo.txt";
+    public string $filename = 'input/daytwo.txt';
 
     public array $encrypted_guide_for_opponent = [
         'A' => 'ROCK',
@@ -49,8 +49,8 @@ class DayTwoController extends Controller
     {
         $array = Arr::fromFile(Storage::get($this->filename));
 
-        echo "1) Total: " . $this->total($array) . "<br>\n";
-        echo "2) New Total: " . $this->newTotal($array) . "<br>\n";
+        echo '1) Total: '.$this->total($array)."<br>\n";
+        echo '2) New Total: '.$this->newTotal($array)."<br>\n";
     }
 
     /**

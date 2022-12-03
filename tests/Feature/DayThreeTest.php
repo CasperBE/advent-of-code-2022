@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class DayThreeTest extends TestCase
 {
-    public string $filename = "test/daythree.txt";
+    public string $filename = 'test/daythree.txt';
 
     /**
      * A basic feature test example.

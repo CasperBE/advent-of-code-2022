@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DayThreeController extends Controller
 {
-    public string $filename = "input/daythree.txt";
+    public string $filename = 'input/daythree.txt';
 
     /**
      * Handle the incoming request.
@@ -19,8 +19,8 @@ class DayThreeController extends Controller
     {
         $array = Arr::fromFile(Storage::get($this->filename));
 
-        echo "1) Sum of priorities: " . $this->sumOfPriorities($array) . "<br>\n";
-        echo "2) New sum of priorities: " . $this->newSumOfPriorities($array);
+        echo '1) Sum of priorities: '.$this->sumOfPriorities($array)."<br>\n";
+        echo '2) New sum of priorities: '.$this->newSumOfPriorities($array);
     }
 
     /**
@@ -120,7 +120,7 @@ class DayThreeController extends Controller
      * @param string ...$strings
      * @return string
      */
-    public function findCommonLetter(string...$strings): string
+    public function findCommonLetter(string ...$strings): string
     {
         $arrays = [];
 

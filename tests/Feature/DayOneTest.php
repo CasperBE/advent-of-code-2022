@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class DayOneTest extends TestCase
 {
-    public string $filename = "test/dayone.txt";
+    public string $filename = 'test/dayone.txt';
 
     /**
      * Test day one, first task.
