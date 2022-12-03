@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class DayTwoController extends Controller
@@ -46,7 +47,7 @@ class DayTwoController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $array = $this->fileToArray(Storage::get($this->filename));
+        $array = Arr::fromFile(Storage::get($this->filename));
 
         echo "1) Total: " . $this->total($array) . "<br>\n";
         echo "2) New Total: " . $this->newTotal($array) . "<br>\n";
