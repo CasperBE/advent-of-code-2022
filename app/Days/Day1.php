@@ -1,35 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Days;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
-class DayOneController extends Controller
+class Day1
 {
-    public string $filename = 'input/dayone.txt';
+    public int $day = 1;
 
-    /**
-     * Handle the incoming request.
-     *
-     * @param Request $request
-     */
-    public function __invoke(Request $request)
+    public array $array;
+
+    public function __construct(array $array = null)
     {
-        $array = Arr::fromFile(Storage::get($this->filename));
-
-        echo '1) Highest total: '.$this->getHighestTotal($array)."<br>\n";
-
-        echo '2) Top three totals: '.$this->getTopThreeTotal($array);
+        if (! is_null($array)) {
+            $this->array = $array;
+        } else {
+            $this->array = Arr::fromFile(Storage::get('/input/day'.$this->day.'.txt'));
+        }
     }
 
-    public function getHighestTotal($array): int
+    public function part1(): int
     {
         $current_total = 0;
         $highest_total = 0;
 
-        foreach ($array as $line) {
+        foreach ($this->array as $line) {
             if ($line === '') {
                 if ($current_total > $highest_total) {
                     $highest_total = $current_total;
@@ -44,12 +40,12 @@ class DayOneController extends Controller
         return $highest_total;
     }
 
-    public function getTopThreeTotal($array): int
+    public function part2(): int
     {
         $current_total = 0;
         $totals = [];
 
-        foreach ($array as $line) {
+        foreach ($this->array as $line) {
             if ($line === '') {
                 $totals[] = $current_total;
 

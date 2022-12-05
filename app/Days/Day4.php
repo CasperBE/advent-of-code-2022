@@ -1,39 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Days;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
-class DayFourController extends Controller
+class Day4
 {
-    public string $filename = 'input/dayfour.txt';
+    public int $day = 4;
 
-    /**
-     * Handle the incoming request.
-     *
-     * @param Request $request
-     */
-    public function __invoke(Request $request)
+    public array $array;
+
+    public function __construct(array $array = null)
     {
-        $array = Arr::fromFile(Storage::get($this->filename));
-
-        echo '1) Number of fully contained pairs: '.$this->numberOfFullyContainedPairs($array)."<br>\n";
-        echo '2) Number of contained pairs: '.$this->numberOfContainedPairs($array);
+        if (! is_null($array)) {
+            $this->array = $array;
+        } else {
+            $this->array = Arr::fromFile(Storage::get('/input/day'.$this->day.'.txt'));
+        }
     }
 
-    /**
-     * Get the number of pairs of which one is fully contained by the other.
-     *
-     * @param array $array
-     * @return int
-     */
-    public function numberOfFullyContainedPairs(array $array): int
+    public function part1(): int
     {
         $count = 0;
 
-        foreach ($array as $line) {
+        foreach ($this->array as $line) {
             if (empty($line)) {
                 continue;
             }
@@ -48,17 +39,11 @@ class DayFourController extends Controller
         return $count;
     }
 
-    /**
-     * Get the number of pairs of which one is at least partially contained by the other.
-     *
-     * @param array $array
-     * @return int
-     */
-    public function numberOfContainedPairs(array $array): int
+    public function part2(): int
     {
         $count = 0;
 
-        foreach ($array as $line) {
+        foreach ($this->array as $line) {
             if (empty($line)) {
                 continue;
             }

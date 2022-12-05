@@ -1,39 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Days;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
-class DayThreeController extends Controller
+class Day3
 {
-    public string $filename = 'input/daythree.txt';
+    public int $day = 3;
 
-    /**
-     * Handle the incoming request.
-     *
-     * @param Request $request
-     */
-    public function __invoke(Request $request)
+    public array $array;
+
+    public function __construct(array $array = null)
     {
-        $array = Arr::fromFile(Storage::get($this->filename));
-
-        echo '1) Sum of priorities: '.$this->sumOfPriorities($array)."<br>\n";
-        echo '2) New sum of priorities: '.$this->newSumOfPriorities($array);
+        if (! is_null($array)) {
+            $this->array = $array;
+        } else {
+            $this->array = Arr::fromFile(Storage::get('/input/day'.$this->day.'.txt'));
+        }
     }
 
-    /**
-     * Get the sum of all priorities, as defined in the first part of the puzzle.
-     *
-     * @param array $array
-     * @return int
-     */
-    public function sumOfPriorities(array $array): int
+    public function part1(): int
     {
         $sum = 0;
 
-        foreach ($array as $line) {
+        foreach ($this->array as $line) {
             if (empty($line)) {
                 continue;
             }
@@ -53,19 +44,13 @@ class DayThreeController extends Controller
         return $sum;
     }
 
-    /**
-     * Get the sum of all priorities, as defined in the second part of the puzzle.
-     *
-     * @param array $array
-     * @return int
-     */
-    public function newSumOfPriorities(array $array): int
+    public function part2(): int
     {
         $sum = 0;
 
         $lines = [];
 
-        foreach ($array as $line) {
+        foreach ($this->array as $line) {
             if (empty($line)) {
                 continue;
             }

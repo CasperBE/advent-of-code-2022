@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Days;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
-class DayTwoController extends Controller
+class Day2
 {
-    public string $filename = 'input/daytwo.txt';
+    public int $day = 2;
+
+    public array $array;
 
     public array $encrypted_guide_for_opponent = [
         'A' => 'ROCK',
@@ -40,30 +41,20 @@ class DayTwoController extends Controller
         'WIN' => 6,
     ];
 
-    /**
-     * Handle the incoming request.
-     *
-     * @param Request $request
-     */
-    public function __invoke(Request $request)
+    public function __construct(array $array = null)
     {
-        $array = Arr::fromFile(Storage::get($this->filename));
-
-        echo '1) Total: '.$this->total($array)."<br>\n";
-        echo '2) New Total: '.$this->newTotal($array)."<br>\n";
+        if (! is_null($array)) {
+            $this->array = $array;
+        } else {
+            $this->array = Arr::fromFile(Storage::get('/input/day'.$this->day.'.txt'));
+        }
     }
 
-    /**
-     * Get the total score.
-     *
-     * @param array $array
-     * @return int
-     */
-    public function total(array $array): int
+    public function part1(): int
     {
         $total = 0;
 
-        foreach ($array as $line) {
+        foreach ($this->array as $line) {
             if (empty($line)) {
                 continue;
             }
@@ -83,17 +74,11 @@ class DayTwoController extends Controller
         return $total;
     }
 
-    /**
-     * Get the new total score.
-     *
-     * @param array $array
-     * @return int
-     */
-    public function newTotal(array $array): int
+    public function part2(): int
     {
         $total = 0;
 
-        foreach ($array as $line) {
+        foreach ($this->array as $line) {
             if (empty($line)) {
                 continue;
             }

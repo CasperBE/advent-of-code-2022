@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\DayFourController;
-use App\Http\Controllers\DayOneController;
-use App\Http\Controllers\DayThreeController;
-use App\Http\Controllers\DayTwoController;
+use App\Http\Controllers\DayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/day1', DayOneController::class)->name('day1');
-
-Route::get('/day2', DayTwoController::class)->name('day2');
-
-Route::get('/day3', DayThreeController::class)->name('day3');
-
-Route::get('/day4', DayFourController::class)->name('day4');
+Route::get('/day/{day}', DayController::class)->name('day');
