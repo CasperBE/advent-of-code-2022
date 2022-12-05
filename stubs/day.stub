@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Days;
+
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+
+class Day$NUMBER$
+{
+    public int $day = $NUMBER$;
+
+    public array $array;
+
+    public function __construct(array $array = null)
+    {
+        if (! is_null($array)) {
+            $this->array = $array;
+        } else {
+            $this->array = Arr::fromFile(Storage::get('/input/day'.$this->day.'.txt'));
+        }
+    }
+
+    public function part1(): int
+    {
+        return 0;
+    }
+
+    public function part2(): int
+    {
+        return 0;
+    }
+}
