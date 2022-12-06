@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Http;
 
 class MakeDayCommand extends Command
 {
@@ -41,6 +42,8 @@ class MakeDayCommand extends Command
 
         $this->createDayTestFile();
 
+        $this->fetchDayInputFile();
+
         return Command::SUCCESS;
     }
 
@@ -68,6 +71,18 @@ class MakeDayCommand extends Command
         }
     }
 
+    public function fetchDayInputFile()
+    {
+        $path = base_path('storage/app/input').'/day'.$this->argument('number').'.txt';
+
+        if (! $this->files->exists($path)) {
+            $this->files->put($path, $this->getDaysInput());
+            $this->info("File $path created");
+        } else {
+            $this->info("File $path already exits");
+        }
+    }
+
     public function getStubContents($stub, $stubVariables = []): array|bool|string
     {
         $contents = file_get_contents($stub);
@@ -77,6 +92,19 @@ class MakeDayCommand extends Command
         }
 
         return $contents;
+    }
+
+    public function getDaysInput(): string
+    {
+        $url = 'https://adventofcode.com/2022/day/'.$this->argument('number').'/input';
+
+        $response = Http::withCookies(['session' => config('aoc.aoc_session')], 'adventofcode.com')->get($url);
+
+        if ($response->successful()) {
+            return trim($response->body())."\n";
+        }
+
+        return '';
     }
 
     public function getDayStubPath(): string
