@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="ml-4">
-                        <div class="mt-2 text-2xl font-semibold" style="font-family:monospace;">
+                        <div class="mt-2 text-xl font-semibold" style="font-family:monospace;">
                             {{ $part1 }}
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="ml-4">
-                        <div class="mt-2 text-2xl font-semibold" style="font-family:monospace;">
+                        <div class="mt-2 text-xl font-semibold" style="font-family:monospace;">
                             {{ $part2 }}
                         </div>
                     </div>
