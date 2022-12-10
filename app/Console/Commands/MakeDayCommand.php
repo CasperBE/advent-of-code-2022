@@ -44,6 +44,8 @@ class MakeDayCommand extends Command
 
         $this->fetchDayInputFile();
 
+        $this->createDayTestInputFile();
+
         return Command::SUCCESS;
     }
 
@@ -77,6 +79,18 @@ class MakeDayCommand extends Command
 
         if (! $this->files->exists($path)) {
             $this->files->put($path, $this->getDaysInput());
+            $this->info("File $path created");
+        } else {
+            $this->info("File $path already exits");
+        }
+    }
+
+    public function createDayTestInputFile()
+    {
+        $path = base_path('storage/app/test').'/day'.$this->argument('number').'.txt';
+
+        if (! $this->files->exists($path)) {
+            $this->files->put($path, "\n");
             $this->info("File $path created");
         } else {
             $this->info("File $path already exits");
