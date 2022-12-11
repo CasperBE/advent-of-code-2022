@@ -1,46 +1,29 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Days\Day9;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-class Day9Test extends TestCase
-{
-    public string $filename = 'test/day9.txt';
+beforeEach(function () {
+    $filename = 'test/day9.txt';
 
-    public Day9 $day_class;
+    $array = Arr::fromFile(Storage::get($filename));
 
-    /**
-     * Call this template method before each test method is run.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $this->day_class = new Day9($array);
+});
 
-        $array = Arr::fromFile(Storage::get($this->filename));
+it('runs part 1', function () {
+    $this->assertEquals(13, $this->day_class->part1());
+});
 
-        $this->day_class = new Day9($array);
-    }
+it('runs part 2', function () {
+    $this->assertEquals(1, $this->day_class->part2());
+});
 
-    public function test_part1(): void
-    {
-        $this->assertEquals(13, $this->day_class->part1());
-    }
+it('runs part 2 extra', function () {
+    $array = Arr::fromFile(Storage::get('test/day9_extra.txt'));
 
-    public function test_part2(): void
-    {
-        $this->assertEquals(1, $this->day_class->part2());
-    }
+    $this->day_class = new Day9($array);
 
-    public function test_part2_extra(): void
-    {
-        $array = Arr::fromFile(Storage::get('test/day9_extra.txt'));
-
-        $this->day_class = new Day9($array);
-
-        $this->assertEquals(36, $this->day_class->part2());
-    }
-}
+    $this->assertEquals(36, $this->day_class->part2());
+});

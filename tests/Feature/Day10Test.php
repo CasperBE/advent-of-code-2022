@@ -1,38 +1,23 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Days\Day10;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-class Day10Test extends TestCase
-{
-    public string $filename = 'test/day10.txt';
+beforeEach(function () {
+    $filename = 'test/day10.txt';
 
-    public Day10 $day_class;
+    $array = Arr::fromFile(Storage::get($filename));
 
-    /**
-     * Call this template method before each test method is run.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $this->day_class = new Day10($array);
+});
 
-        $array = Arr::fromFile(Storage::get($this->filename));
+it('runs part 1', function () {
+    $this->assertEquals(13140, $this->day_class->part1());
+});
 
-        $this->day_class = new Day10($array);
-    }
-
-    public function test_part1(): void
-    {
-        $this->assertEquals(13140, $this->day_class->part1());
-    }
-
-    public function test_part2(): void
-    {
-        $expected_output = '##..##..##..##..##..##..##..##..##..##..
+it('runs part 2', function () {
+    $expected_output = '##..##..##..##..##..##..##..##..##..##..
 ###...###...###...###...###...###...###.
 ####....####....####....####....####....
 #####.....#####.....#####.....#####.....
@@ -40,6 +25,5 @@ class Day10Test extends TestCase
 #######.......#######.......#######.....
 ';
 
-        $this->assertEquals($expected_output, $this->day_class->part2());
-    }
-}
+    $this->assertEquals($expected_output, $this->day_class->part2());
+});

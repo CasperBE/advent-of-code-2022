@@ -1,37 +1,22 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Days\Day$NUMBER$;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-class Day$NUMBER$Test extends TestCase
-{
-    public string $filename = 'test/day$NUMBER$.txt';
+beforeEach(function () {
+    $filename = 'test/day$NUMBER$.txt';
 
-    public Day$NUMBER$ $day_class;
+    $array = Arr::fromFile(Storage::get($filename));
 
-    /**
-     * Call this template method before each test method is run.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $this->day_class = new Day$NUMBER$($array);
+});
 
-        $array = Arr::fromFile(Storage::get($this->filename));
 
-        $this->day_class = new Day$NUMBER$($array);
-    }
+it('runs part 1', function () {
+    $this->assertEquals(0, $this->day_class->part1());
+});
 
-    public function test_part1(): void
-    {
-        $this->assertEquals(0, $this->day_class->part1());
-    }
-
-    public function test_part2(): void
-    {
-        $this->assertEquals(0, $this->day_class->part2());
-    }
-}
+it('runs part 2', function () {
+    $this->assertEquals(0, $this->day_class->part2());
+});
